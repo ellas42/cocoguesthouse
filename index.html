@@ -94,7 +94,6 @@
             </div>
             <br />
             <div class="reviews-container">
-              <button class="scroll-btn left" onclick="scrollLeft()">&#10094;</button>
               <div class="reviews-wrapper">
                 <div class="review-card">
                     <img src="martina.png" alt="Reviewer 6" class="profile-pic">
@@ -133,7 +132,6 @@
                   <p>We had a lovely stay at the Coco Guest house Canggu. Surrounded by peace, In total relaxation, in a clean apartment with comfortable spaces. The owners are nice and helpful guys. Super recommended</p>
                 </div>
               </div>
-              <button class="scroll-btn right" onclick="scrollRight()">&#10095;</button>
             </div>
 
             <br />
@@ -151,13 +149,6 @@
                     background.classList.remove('hover');
                 }
             });
-
-            function scrollLeft() {
-            document.querySelector('.reviews-wrapper').scrollBy({ left: -300, behavior: 'smooth' });
-        }
-        function scrollRight() {
-            document.querySelector('.reviews-wrapper').scrollBy({ left: 300, behavior: 'smooth' });
-        }
         </script>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
