@@ -1,28 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* Reset body and html */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Poppins', sans-serif;
+    font-size: 16px;
 }
 
-/* Background styling with hover effect */
-.background {
-    background-image: url('photo4edited.jpg'); /* Replace with your image path */
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    position: relative;
-    transition: transform 0.5s ease-in-out; /* Smooth transition for scaling */
+@media (max-width: 768px) {
+    body, html {
+        font-size: 14px;
+    }
 }
+.background {
+    background-image: url('photo4edited.jpg');
+    background-size: cover; /* Ensures the image covers the full container */
+    background-position: center center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Fixes the background in place */
+    width: 100%; /* Ensures it doesn't overflow horizontally */
+    height: 100vh; /* Sets the height of the container to 100% of the viewport height */
+    position: relative;
+    overflow: hidden; /* Hides any overflow */
+    transition: transform 0.5s ease-in-out;
+}
+
 
 .background.hover {
-    transform: scale(1.1); /* Zoom effect on scroll */
+    transform: scale(1.1);
 }
 
-/* Overlay for text */
 .overlay {
     color: white;
     height: 100%;
@@ -33,35 +41,53 @@ body, html {
     padding: 20px;
 }
 
-/* Gallery section */
 #gallery h2 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
-/* The photo-grid container: center it and adjust for responsive */
 .photo-grid {
     width: 100%;
-    max-width: 1200px; /* Set a max-width for the grid to match the background */
+    max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns by default */
-    gap: 15px;
-    padding: 20px 50px;
-    justify-items: center; /* Centers grid items */
-    margin: 0 auto; /* Centers the grid on the page */
-    box-sizing: border-box; /* Include padding in the element’s width */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
-@media screen and (max-width: 768px) {
-    /* For tablets and mobile screens */
-    .photo-grid {
-        grid-template-columns: 1fr; /* One column on small screens */
-        padding: 20px; /* Adjust padding */
+.photo-grid .photo-item {
+    padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .photo-grid .photo-item {
+        grid-template-columns: 1fr;
+        padding: 10px;
     }
 }
 
-/* Style for each photo container */
+@media (max-width: 1200px) {
+    .photo-grid {
+        max-width: 90%;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .photo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
 .photo {
     position: relative;
     width: 100%;
@@ -71,18 +97,16 @@ body, html {
     align-items: center;
 }
 
-/* Styling for images and their hover effect */
 .photo img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 8px;
-    transition: transform 0.3s ease-in-out; /* Transition for scaling */
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Hover effect for images */
 .photo img:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
+    transform: scale(1.1);
 }
 
 .caption {
@@ -96,7 +120,6 @@ body, html {
     font-size: 1rem;
 }
 
-/* Navigation styling */
 nav {
     text-align: center;
     margin: 20px 0;
@@ -109,6 +132,7 @@ nav ul {
     margin: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -148,7 +172,21 @@ nav ul li a:hover::after {
     transform-origin: bottom left;
 }
 
-/* About section */
+@media (max-width: 600px) {
+    nav ul {
+        display: block;
+        text-align: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+    }
+}
+
 #about {
     padding: 20px 50px;
     text-align: center;
@@ -163,7 +201,6 @@ nav ul li a:hover::after {
     line-height: 1.6;
 }
 
-/* Main and footer styling */
 main, p {
     font-size: 1.2rem;
     line-height: 1.8;
@@ -178,80 +215,208 @@ header p {
     font-size: 1.5rem;
 }
 
-/* Reviews Section Styling */
+#bookingModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.modal-content button {
+    background-color: #000000;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:nth-child(1) {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content button:nth-child(2) {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content button:last-child {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content .agoda-btn {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-content button:hover {
+    background-color: #000000;
+}
+
+.modal-content button:last-child {
+    background-color: #808080;
+}
+
+.modal-content button:last-child:hover {
+    background-color: #808080;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+    background-color: transparent;
+    border: none;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.cancel-btn {
+    margin-top: auto; /* Pushes the button to the bottom */
+    font-size: 12px; /* Smaller font size */
+    padding: 8px 16px; /* Smaller padding */
+    background-color: #7e7e7e; /* Red background color */
+    color: white; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: auto;
+}
+
+.cancel-btn:hover {
+    background-color: #2e2e2e; /* Darker red when hovered */
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 .reviews {
     padding: 20px 50px;
     color: #000;
-  }
-  
-  .reviews h1 {
+}
+
+.reviews h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     text-align: center;
-  }
-  
-  .reviews-under {
+}
+
+.reviews-under {
     font-size: 1.2rem;
     margin-bottom: 20px;
     font-weight: bold;
     text-align: center;
-  }
-  
-  .reviews-container {
+}
+
+.reviews-container {
     position: relative;
     overflow: hidden;
     margin: 0 auto;
-    max-width: 1100px; /* Adjusted to display roughly 3.5 review cards */
-  }
-  
-  .reviews-wrapper {
+    max-width: 1100px;
+}
+
+.reviews-wrapper {
     display: flex;
     gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding-bottom: 20px;
-  }
-  
-  .review-card {
+}
+
+.review-card {
     min-width: 300px;
     flex: 0 0 auto;
     border: 3px solid #616161;
     padding: 15px;
     background-color: #fff;
     text-align: left;
-    
-  }
-  
-  .profile-pic {
+}
+
+.profile-pic {
     width: 50px;
     height: 50px;
-    background-color: #fff; /* Blank square */
+    background-color: #fff;
     display: block;
     margin-bottom: 10px;
     object-fit: cover;
-  }
-  
-  .review-card h3 {
+}
+
+.review-card h3 {
     margin: 0;
     font-size: 1.2rem;
-  }
-  
-  .review-date {
+}
+
+.review-date {
     font-size: 0.9rem;
     color: #000;
     display: block;
     margin-bottom: 10px;
-  }
-  
-  /* Make the review text a paragraph with wrapping */
-  .review-card p {
-    max-width: 250px; /* Adjust as needed to fit the layout */
+}
+
+.review-card p {
+    max-width: 250px;
     word-wrap: break-word;
     line-height: 1.5;
     margin-bottom: 0;
-  }
-  
-  .scroll-btn {
+}
+
+.scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -261,26 +426,24 @@ header p {
     cursor: pointer;
     color: #000;
     z-index: 1;
-  }
-  
-  .scroll-btn.left {
+}
+
+.scroll-btn.left {
     left: 0;
-  }
-  
-  .scroll-btn.right {
+}
+
+.scroll-btn.right {
     right: 0;
-  }
-  
+}
+
 .more {
     text-align: center;
 }
-  
 
 #footer {
     text-align: center;
 }
 
-/* Smooth scroll and header effect */
 html {
     scroll-behavior: smooth;
 }
