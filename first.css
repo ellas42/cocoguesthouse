@@ -417,34 +417,6 @@ header p {
     margin-bottom: 0;
 }
 
-.scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #000;
-    z-index: 1;
-}
-
-.scroll-btn.left {
-    left: 0;
-}
-
-.scroll-btn.right {
-    right: 0;
-}
-
-.more {
-    text-align: center;
-}
-
-#footer {
-    text-align: center;
-}
-
 html {
     scroll-behavior: smooth;
 }
